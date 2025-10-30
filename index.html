@@ -3,116 +3,56 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>عرض الفيديو | 3D</title>
-  <meta name="description" content="صفحة خفيفة لعرض الفيديو مباشرة بعد مسح رمز QR.">
+  <title>عرض الفيديو | 3D (تشغيل بالصوت)</title>
+  <meta name="description" content="صفحة لعرض الفيديو مع بدء الصوت مفعلاً بعد الضغط.">
   <meta name="theme-color" content="#0ea5e9">
-  <!-- Open Graph (يتم تحديث العنوان/الوصف تلقائياً على منصات المشاركة) -->
   <meta property="og:type" content="video.other">
   <meta property="og:title" content="عرض الفيديو | 3D">
-  <meta property="og:description" content="شاهد الفيديو مباشرة.">
+  <meta property="og:description" content="شاهد الفيديو بالصوت بعد الضغط على تشغيل.">
   <meta property="og:video:type" content="video/mp4">
   <meta property="og:video" content="3D.mp4">
   <meta property="og:video:width" content="1280">
   <meta property="og:video:height" content="720">
   <style>
     :root{
-      --bg: #0b1220;
-      --card: #0f172a;
-      --text: #e2e8f0;
-      --muted:#94a3b8;
-      --brand:#38bdf8;
+      --bg: #0b1220; --card: #0f172a; --text: #e2e8f0; --muted:#94a3b8; --brand:#38bdf8;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Kufi Arabic", "Noto Sans Arabic", "Tahoma", Arial, sans-serif;
+      margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Kufi Arabic", "Noto Sans Arabic", "Tahoma", Arial, sans-serif;
       color:var(--text);
       background:
         radial-gradient(1200px 800px at 80% -10%, rgba(56,189,248,.25), transparent 60%),
         radial-gradient(900px 600px at 0% 100%, rgba(16,185,129,.2), transparent 60%),
         var(--bg);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+      display:flex; align-items:center; justify-content:center; padding:24px;
     }
-    .wrap{
-      width:min(100%, 900px);
-    }
+    .wrap{ width:min(100%, 900px); }
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid rgba(148,163,184,.15);
-      border-radius:24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      overflow:hidden;
-      backdrop-filter: blur(6px);
+      border-radius:24px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      overflow:hidden; backdrop-filter: blur(6px);
     }
-    header{
-      padding:18px 22px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      border-bottom:1px solid rgba(148,163,184,.12);
-    }
+    header{ padding:18px 22px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(148,163,184,.12); }
     .dot{width:10px;height:10px;border-radius:50%}
-    .dot.blue{background:#38bdf8}
-    .dot.green{background:#34d399}
-    .dot.yellow{background:#fbbf24}
-    h1{
-      font-size:18px;
-      margin:0;
-      letter-spacing:.2px;
-    }
-    .sub{
-      color:var(--muted);
-      font-size:13px;
-    }
-    .player{
-      position:relative;
-      background:#000;
-      aspect-ratio:16/9;
-      width:100%;
-    }
-    video{
-      display:block;
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      background:#000;
-    }
-    .controls{
-      display:flex;
-      gap:10px;
-      padding:14px 18px 20px 18px;
-      border-top:1px solid rgba(148,163,184,.12);
-      background:linear-gradient(180deg, rgba(2,6,23,.6), rgba(2,6,23,.2));
-      flex-wrap:wrap;
-      justify-content:space-between;
-    }
+    .dot.blue{background:#38bdf8}.dot.green{background:#34d399}.dot.yellow{background:#fbbf24}
+    h1{ font-size:18px; margin:0; letter-spacing:.2px; }
+    .sub{ color:var(--muted); font-size:13px; }
+    .player{ position:relative; background:#000; aspect-ratio:16/9; width:100%; }
+    video{ display:block; width:100%; height:100%; object-fit:contain; background:#000; }
+    .controls{ display:flex; gap:10px; padding:14px 18px 20px 18px; border-top:1px solid rgba(148,163,184,.12);
+      background:linear-gradient(180deg, rgba(2,6,23,.6), rgba(2,6,23,.2)); flex-wrap:wrap; justify-content:space-between; }
     .left, .right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     button, .linklike{
-      appearance:none;
-      border:1px solid rgba(148,163,184,.2);
-      background:rgba(30,41,59,.6);
-      color:var(--text);
-      padding:10px 14px;
-      border-radius:12px;
-      font-weight:600;
-      cursor:pointer;
-      transition:all .2s ease;
-      text-decoration:none;
-      font-size:14px;
+      appearance:none; border:1px solid rgba(148,163,184,.2); background:rgba(30,41,59,.6); color:var(--text);
+      padding:10px 14px; border-radius:12px; font-weight:600; cursor:pointer; transition:all .2s ease; text-decoration:none; font-size:14px;
     }
     button:hover, .linklike:hover{transform:translateY(-1px);border-color:rgba(148,163,184,.35)}
-    .brand{
-      background:linear-gradient(90deg, #38bdf8, #22d3ee);
-      color:#0b1220;
-      border-color:transparent;
-    }
+    .brand{ background:linear-gradient(90deg, #38bdf8, #22d3ee); color:#0b1220; border-color:transparent; }
     .hint{color:var(--muted); font-size:12px; margin-top:10px; text-align:center}
     footer{margin-top:16px; text-align:center; color:var(--muted); font-size:12px}
-    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
   </style>
 </head>
 <body>
@@ -123,14 +63,13 @@
         <span class="dot green" aria-hidden="true"></span>
         <span class="dot yellow" aria-hidden="true"></span>
         <div>
-          <h1>تشغيل الفيديو</h1>
-          <div class="sub">يتم تشغيل المقطع مباشرة بعد المسح</div>
+          <h1>تشغيل الفيديو بالصوت</h1>
+          <div class="sub">اضغط «تشغيل» لبدء المقطع مع الصوت.</div>
         </div>
       </header>
 
       <div class="player">
-        <!-- ضع الملف 3D.mp4 بجانب هذه الصفحة ليعمل المسار النسبي -->
-        <video id="vid" playsinline controls preload="metadata" poster="" aria-label="مشغل الفيديو">
+        <video id="vid" playsinline controls preload="metadata" aria-label="مشغل الفيديو">
           <source src="3D.mp4" type="video/mp4">
           متصفحك لا يدعم تشغيل الفيديو. يمكنك تنزيل الملف من الزر بالأسفل.
         </video>
@@ -138,7 +77,7 @@
 
       <div class="controls" dir="rtl">
         <div class="left">
-          <button class="brand" id="playBtn" type="button">تشغيل</button>
+          <button class="brand" id="playBtn" type="button">تشغيل بالصوت</button>
           <button id="muteBtn" type="button">كتم الصوت</button>
           <button id="pipBtn" type="button">صورة داخل صورة</button>
         </div>
@@ -148,7 +87,7 @@
         </div>
       </div>
     </div>
-    <p class="hint">نصيحة: لتشغيل تلقائي على الجوال، اترك الصوت مكتوماً ثم اضغط تشغيل لتمكين الصوت.</p>
+    <p class="hint">ملاحظة: تمنع المتصفحات تشغيل الصوت تلقائيًا، لذا ستحتاج إلى الضغط على «تشغيل».</p>
     <footer>© تصميم الأستاذ أحمد الضامري| Ahm7d@moe.om.</footer>
   </main>
 
@@ -159,14 +98,13 @@
     const pipBtn  = document.getElementById('pipBtn');
     const copyBtn = document.getElementById('copyLink');
 
-    // محاولة التشغيل التلقائي مكتوماً (يعتمد على المتصفح)
-    v.muted = true;
-    v.play().catch(()=>{});
+    // الصوت مفعّل افتراضياً، ولا نحاول التشغيل التلقائي.
+    v.muted = false;
 
     playBtn.addEventListener('click', async () => {
       try {
         if (v.paused) { await v.play(); playBtn.textContent = 'إيقاف مؤقت'; }
-        else { v.pause(); playBtn.textContent = 'تشغيل'; }
+        else { v.pause(); playBtn.textContent = 'تشغيل بالصوت'; }
       } catch(e){ console.warn(e); }
     });
 
@@ -193,9 +131,8 @@
       }catch(e){ console.warn(e); }
     });
 
-    // تحديث زر التشغيل مع حالة الفيديو
     v.addEventListener('play', ()=> playBtn.textContent='إيقاف مؤقت');
-    v.addEventListener('pause', ()=> playBtn.textContent='تشغيل');
+    v.addEventListener('pause', ()=> playBtn.textContent='تشغيل بالصوت');
   </script>
 </body>
 </html>
